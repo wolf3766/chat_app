@@ -104,7 +104,7 @@ export default function ChatContainer({ currentChat, socket }) {
 
 const Container = styled.div`
   display: grid;
-  grid-template-rows: 10% 80% 10%;
+  grid-template-rows: 10% 70% 10%;
   gap: 0.1rem;
   overflow: hidden;
   @media screen and (min-width: 720px) and (max-width: 1080px) {
@@ -119,11 +119,11 @@ const Container = styled.div`
       display: flex;
       align-items: center;
       gap: 1rem;
-      ${'' /* .avatar {
+      .avatar {
         img {
           height: 3rem;
         }
-      } */}
+      }
       .username {
         h3 {
           color: white;

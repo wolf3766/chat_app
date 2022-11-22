@@ -16,10 +16,19 @@ export default function Register() {
     theme: "dark",
   };
   const [values, setValues] = useState({
+    user_phone_number: "",
+    user_name: "",
+    user_bio: "",
+    user_ip_address: "",
+    user_dob:"",
+    user_phone_name:"",
+    user_fcm:"",
+    country:"",
     username: "",
     email: "",
     password: "",
     confirmPassword: "",
+
   });
 
   useEffect(() => {
@@ -63,11 +72,27 @@ export default function Register() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (handleValidation()) {
-      const { email, username, password } = values;
+      const { user_phone_number,
+        user_name,
+        user_bio,
+        user_ip_address,
+        user_dob,
+        user_phone_name,
+        user_fcm,
+        country,email, 
+        username, 
+        password } = values;
+        
       const { data } = await axios.post(registerRoute, {
-        username,
-        email,
-        password,
+      user_phone_number,
+      user_name,
+      user_bio,
+      user_ip_address,
+      user_dob,
+      user_phone_name,
+      user_fcm,
+      country,
+      email, username, password
       });
 
       if (data.status === false) {

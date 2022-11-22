@@ -3,6 +3,7 @@ import { BsEmojiSmileFill } from "react-icons/bs";
 import { IoMdSend } from "react-icons/io";
 import styled from "styled-components";
 import Picker from "emoji-picker-react";
+import axios from "axios";
 
 export default function ChatInput({ handleSendMsg }) {
   const [msg, setMsg] = useState("");
@@ -24,6 +25,12 @@ export default function ChatInput({ handleSendMsg }) {
       setMsg("");
     }
   };
+  const handleUpload= async()=>{
+     await axios.post("http://localhost:5000/upload")
+     .then(response =>{
+      console.log(response);
+     })
+  }
 
   return (
     <Container>
@@ -33,6 +40,7 @@ export default function ChatInput({ handleSendMsg }) {
           {showEmojiPicker && <Picker onEmojiClick={handleEmojiClick} />}
         </div>
       </div>
+
       <form className="input-container" onSubmit={(event) => sendChat(event)}>
         <input
           type="text"
@@ -44,6 +52,14 @@ export default function ChatInput({ handleSendMsg }) {
           <IoMdSend />
         </button>
       </form>
+      
+      <form encType="multipart/form-data" onSubmit={handleUpload} >
+          <div >
+            <input type="file" name="file" id="file" className="custom-file-input" />
+            {/* <label for="file" className="custom-file-label">Choose File</label> */}
+          </div>
+          <button type="submit"><IoMdSend/> </button>
+        </form>
     </Container>
   );
 }
