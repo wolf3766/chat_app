@@ -58,10 +58,12 @@ const storage = new GridFsStorage({
 });
 const upload = multer({ storage });
 app.post('/upload', upload.single('file'), (req, res) => {
-  console.log(res.json({ file: req.file }));
+  // console.log(res.json({ file: req.file }));
+  
     console.log("res");
 });
-  
+
+
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
@@ -78,7 +80,7 @@ const io = socket(server, {
 global.onlineUsers = new Map();
 io.on("connection", (socket) => {
   global.chatSocket = socket;
-
+  
   socket.on("add-user", (userId) => {
     onlineUsers.set(userId, socket.id);
   });

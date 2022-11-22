@@ -3,14 +3,12 @@ const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema({
   user_reg_no: {
     type: String,
-    unique:true,
     default:"3525"
   },country:{
     type:String,
     default:"3525"
   },user_phone_number:{
     type:Number,
-    unique:true,
     default:"3525"
   },user_image:{
     type:String,
@@ -26,7 +24,6 @@ const userSchema = new mongoose.Schema({
     default:"3525"
   },user_ip_address:{
     type:String,
-    unique:true,
     default:"3525"
   },user_phone_name:{
     type:String,
@@ -34,7 +31,6 @@ const userSchema = new mongoose.Schema({
   },user_fcm:{
     type:String,
     default:"3525",
-    unique:true
   },user_status:{
     type:Boolean,
     default:false,

@@ -11,6 +11,9 @@ module.exports.login = async (req, res, next) => {
     if (!isPasswordValid)
       return res.json({ msg: "Incorrect Username or Password", status: false });
     delete user.password;
+   await User.updateOne({username: req.body.username},{
+    $set:{user_status:true}
+   })
     return res.json({ status: true, user });
   } catch (ex) {
     next(ex);
@@ -74,10 +77,13 @@ module.exports.setAvatar = async (req, res, next) => {
   }
 };
 
-module.exports.logOut = (req, res, next) => {
+module.exports.logOut = async(req, res, next) => {
   try {
     if (!req.params.id) return res.json({ msg: "User id is required " });
     onlineUsers.delete(req.params.id);
+    await User.updateOne({_id: req.params.id},{
+      $set:{user_status:false}
+     })
     return res.status(200).send();
   } catch (ex) {
     next(ex);
