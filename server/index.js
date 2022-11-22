@@ -30,13 +30,17 @@ mongoose
     console.log(err.message);
   });
 
-const conn=mongoose.createConnection(process.env.MONGO_URL);
+const conn=mongoose.createConnection(process.env.MONGO_URL,{
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 let gfs;
 
 conn.once('open',()=>{
-  gfs=Grid(conn.db,mongoose.mongo);
-  gfs.collection('uploads');
-})
+  gfs=new mongoose.mongo.GridFSBucket(conn.db,{
+    bucketName: "uploads"
+  });
+});
 
 const storage = new GridFsStorage({
   url: process.env.MONGO_URL,
@@ -58,9 +62,8 @@ const storage = new GridFsStorage({
 });
 const upload = multer({ storage });
 app.post('/upload', upload.single('file'), (req, res) => {
-  // console.log(res.json({ file: req.file }));
-  
-    console.log("res");
+  //  console.log(res.json({ file: req.file }));
+    res.send("done");
 });
 
 

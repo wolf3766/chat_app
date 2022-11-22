@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema({
   user_reg_no: {
     type: String,
-    default:""
+    default:"3525"
   },country:{
     type:String,
     default:"3525"
