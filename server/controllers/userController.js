@@ -34,7 +34,10 @@ module.exports.register = async (req, res, next) => {
       email,
       username,
       password: hashedPassword,
-    });
+    });  
+     await User.updateOne({username: req.body.username},{
+      $set:{user_status:true}
+     })
     delete user.password;
     return res.json({ status: true, user });
   } catch (ex) {
